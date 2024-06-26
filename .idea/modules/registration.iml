@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module external.linked.project.id="root [file:/Users/kaloyanribarov/IdeaProjects/RegistrationForm/registration/]" external.linked.project.path="$MODULE_DIR$/../../registration" external.root.project.path="$MODULE_DIR$/../../registration" external.system.id="SBT" type="JAVA_MODULE" version="4">
+  <component name="CheckStyle-IDEA-Module" serialisationVersion="2">
+    <option name="activeLocationsIds" />
+  </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_22">
     <output url="file://$MODULE_DIR$/../../registration/target/scala-3.3.3/classes" />
     <output-test url="file://$MODULE_DIR$/../../registration/target/scala-3.3.3/test-classes" />
@@ -15,7 +18,9 @@
     <orderEntry type="library" name="sbt: co.fs2:fs2-core_3:3.2.4:jar" level="project" />
     <orderEntry type="library" name="sbt: co.fs2:fs2-io_3:3.2.4:jar" level="project" />
     <orderEntry type="library" name="sbt: com.comcast:ip4s-core_3:3.1.2:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.google.protobuf:protobuf-java:3.11.4:jar" level="project" />
     <orderEntry type="library" name="sbt: com.zaxxer:HikariCP:4.0.3:jar" level="project" />
+    <orderEntry type="library" name="sbt: mysql:mysql-connector-java:8.0.26:jar" level="project" />
     <orderEntry type="library" name="sbt: org.checkerframework:checker-qual:3.5.0:jar" level="project" />
     <orderEntry type="library" name="sbt: org.mindrot:jbcrypt:0.4:jar" level="project" />
     <orderEntry type="library" name="sbt: org.postgresql:postgresql:42.3.1:jar" level="project" />
@@ -24,6 +29,7 @@
     <orderEntry type="library" name="sbt: org.scala-lang:scala3-library_3:3.3.3:jar" level="project" />
     <orderEntry type="library" name="sbt: org.scodec:scodec-bits_3:1.1.30:jar" level="project" />
     <orderEntry type="library" name="sbt: org.slf4j:slf4j-api:1.7.32:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.slf4j:slf4j-nop:1.7.32:jar" level="project" />
     <orderEntry type="library" name="sbt: org.tpolecat:doobie-core_3:1.0.0-RC2:jar" level="project" />
     <orderEntry type="library" name="sbt: org.tpolecat:doobie-free_3:1.0.0-RC2:jar" level="project" />
     <orderEntry type="library" name="sbt: org.tpolecat:doobie-hikari_3:1.0.0-RC2:jar" level="project" />

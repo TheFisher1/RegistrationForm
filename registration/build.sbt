@@ -11,6 +11,8 @@ libraryDependencies ++= Seq(
   "org.tpolecat" %% "doobie-core" % "1.0.0-RC2",
   "org.tpolecat" %% "doobie-hikari" % "1.0.0-RC2",
   "org.tpolecat" %% "doobie-postgres" % "1.0.0-RC2",
+  "mysql" % "mysql-connector-java" % "8.0.26",
+  "org.slf4j" % "slf4j-nop" % "1.7.32"
 )
 
 scalacOptions ++= Seq(

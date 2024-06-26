@@ -18,9 +18,9 @@ enum PasswordError:
   case PasswordRequiresGreaterVariety
   case PasswordsDoNotMatch
 
-case class RegistrationFormErrors(errors: Chain[RegistrationFormError]):
-  override def toString: String =
-    errors.map(_.toString).foldLeft("")((acc, elem) => acc + elem)
+case class RegistrationFormErrors(errors: Chain[RegistrationFormError])
+//  override def toString: String =
+//    errors.map(_.toString).foldLeft("")((acc, elem) => acc + elem)
 
 object RegistrationFormErrors:
   def apply(registrationFormError: RegistrationFormError): RegistrationFormErrors =
@@ -32,9 +32,8 @@ object RegistrationFormErrors:
   
 
 case class PasswordErrors(errors: Chain[PasswordError]):
-  override def toString: String =
-    errors.map(_.toString).foldLeft("")((acc, elem) => acc + elem)
-
+  override def toString: String = errors.toString
+  
 object PasswordErrors:
   def apply(passwordError: PasswordError): PasswordErrors =
     PasswordErrors(Chain(passwordError))

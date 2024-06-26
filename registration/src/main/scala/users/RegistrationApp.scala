@@ -1,11 +1,13 @@
 package users
 
+import doobie.implicits.toConnectionIOOps
 import cats.data.Validated
 import cats.data.Validated.{Invalid, Valid}
 import cats.effect.IO
 import users.validation.RegistrationFormErrors
 import cats.effect.unsafe.implicits.global
 import cats.implicits.catsSyntaxFlatMapOps
+import sql.{DBMS, transactor}
 import users.validation.{RegistrationForm, Validator}
 
 object RegistrationApp:
@@ -21,16 +23,23 @@ object RegistrationApp:
       _ <- IO.println("Would yoy like to continue? -- y | n")
       _ <- askForContinuance
   } yield ()
-  
+
   private def addUser(user: User): IO[Unit] =
-  IO.println(s"successfully added user with username ${user.username}")
-  
-  
+    DBMS.insert(user).transact(transactor).attempt.flatMap {
+      case Left(value) => IO.println("Email or Username is already in use")
+      case Right(success) => IO.println("Uses was successfully added")
+    }
+
+
   private def produceOutput(validated: Validated[RegistrationFormErrors, User]): IO[Unit] =
     validated match
-      case Valid(user) => 
-        /* adding the user */ addUser(user)
-      case Invalid(errors) => IO.println("there were errors: ") >> IO(errors.toString)
+      case Valid(user) =>
+        addUser(user)
+      case Invalid(errors) => mapErrors(errors)
+  
+  private def mapErrors(errors: RegistrationFormErrors): IO[Unit] =
+    IO.println("there were errors. ") >> IO.println(errors.errors)
+    
   
   private def createRegistrationForm: IO[RegistrationForm] =
     for {
@@ -47,8 +56,8 @@ object RegistrationApp:
   private def askForContinuance: IO[Unit] =
     val shouldContinue = IO.readLine
     shouldContinue.flatMap { answer =>
-      val yes = answer == "y" || answer == "yes"
-      continue(yes)
+      val yesOrNo = answer == "y" || answer == "yes"
+      continue(yesOrNo)
     }
     
   private def promptForInput(prompt: String): IO[String] =
