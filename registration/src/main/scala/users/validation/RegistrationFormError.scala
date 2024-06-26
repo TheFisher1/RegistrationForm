@@ -8,6 +8,7 @@ enum RegistrationFormError:
   case InvalidUsername
 
   case InvalidEmail
+  case PasswordsDoNotMatch
   case EmailIsInUse
 
   case InvalidPassword(errors: PasswordErrors)
@@ -16,7 +17,6 @@ enum PasswordError:
   case PasswordTooShort
 
   case PasswordRequiresGreaterVariety
-  case PasswordsDoNotMatch
 
 case class RegistrationFormErrors(errors: Chain[RegistrationFormError]):
   override def toString: String =
@@ -32,9 +32,8 @@ object RegistrationFormErrors:
   
 
 case class PasswordErrors(errors: Chain[PasswordError]):
-  override def toString: String =
-    errors.map(_.toString).foldLeft("")((acc, elem) => acc + elem)
-
+  override def toString: String = errors.toString
+  
 object PasswordErrors:
   def apply(passwordError: PasswordError): PasswordErrors =
     PasswordErrors(Chain(passwordError))
