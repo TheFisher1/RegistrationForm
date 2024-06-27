@@ -19,6 +19,7 @@ libraryDependencies ++= Seq(
   "org.scalamock" %% "scalamock" % "6.0.0" % Test
 )
 
+
 scalacOptions ++= Seq(
   "-new-syntax",
   "-Xfatal-warnings",
