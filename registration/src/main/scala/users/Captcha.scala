@@ -1,6 +1,7 @@
 package users
 
 import cats.effect.kernel.Sync
+import cats.effect.std.SecureRandom
 
 import scala.util.Random
 
@@ -12,11 +13,10 @@ object Captcha:
   val MIN_LENGTH = 5
   
   def apply(): Captcha =
-    val randomString = ('a' until 'Z') ++ (1 to 100)
+    val allowedCharactersForGeneratingTheString = ('a' until 'Z') ++ (1 to 10)
     val list = Random
-      .shuffle(randomString.tails)
+      .shuffle(allowedCharactersForGeneratingTheString)
+      .combinations(10)
       .map(_.mkString)
-      .filter(_.length > 5)
-      .filter(_.length < 15)
       .toList
       new Captcha(list(Random.nextInt() % list.size))
