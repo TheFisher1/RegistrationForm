@@ -165,20 +165,19 @@ class UserApp[F[_] : Sync](dao: DAO[F], validator: Validator):
 
   private def enterCaptcha(): F[Boolean] =
     for {
-      
-      _ <- Sync[F].pure("Please enter the captcha: ")
+      _ <- Sync[F].pure(println("I am not a robot: "))
       captcha = Captcha()
       _ <- Sync[F].pure(println(captcha.randomString))
       string <- Sync[F].pure(StdIn.readLine())
-    
+
     } yield captcha.check(string)
 
   private def captchaLoop(): F[Unit] =
-    enterCaptcha().flatMap(
-      b => if b then Sync[F].pure(println("continue..."))
+    enterCaptcha().map { b =>
+      if b then Sync[F].pure(println("continue..."))
       else createRegistrationForm.void
-    )
-    
+    }
+
   private def promptForInput(prompt: String): F[String] =
     Sync[F].pure(println(prompt)) >> Sync[F].pure(StdIn.readLine)
 
