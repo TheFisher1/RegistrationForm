@@ -13,7 +13,7 @@ type Username = String
 
 case class RegistrationForm(username: Username, email: Email, password: String, passwordVerification: String)
 
-object Validator:
+class Validator:
   val PASSWORD_MIN_LENGTH = 8
 
   def validateUsername(registrationForm: RegistrationForm): Validated[RegistrationFormErrors, Username] =
